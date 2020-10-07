@@ -34,7 +34,7 @@
         }
         .card{
             margin: 8px;
-            border: 3px solid #6e707e; /* #b7b9cc #858796 #6e707e #5a5c69 */
+            border: 3px solid #858796; /* #b7b9cc #858796 #6e707e #5a5c69 */
             position: relative;
             background: #fff;
             transition: all .4s;
@@ -43,7 +43,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
         }
         figure{
             text-align: center;
@@ -55,13 +54,13 @@
             margin-top: 8px;
             color: #6e707e;
         }
-        span{
+        .ripple{
             position: absolute;
             background: #000;
             transform: translate(-50%, -50%);
             pointer-events: none;
             border-radius: 50%;
-            animation: anim 1s linear infinite;
+            animation: anim 1.2s linear infinite;
         }
         @keyframes anim{
             0%{
@@ -94,23 +93,23 @@
         }
         @media(max-width: 990px){
             .container{
-                grid-template:  "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh
-                                "1fr 1fr 1fr " 42vh;
+                grid-template:  "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px
+                                "1fr 1fr 1fr " 280px;
                             }                
         }
         @media(max-width: 769px){
@@ -560,23 +559,29 @@
     </div>
 
     <script>
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('click', function(e){
+        var btn = document.querySelectorAll('.card');
+        btn.forEach(el => {
+            el.style.position = 'relative';
+            el.style.overflow = 'hidden';
+            el.addEventListener('click', function(e) {
+                var x = e.offsetX;
+                var y = e.offsetY;
 
-                let x = e.clientX - e.target.offsetLeft;
-                let y = e.clientY - e.target.offsetTop;
+                var ripples = document.getElementsByClassName('ripple');
 
-                let ripples = document.createElement('span');
-                    ripples.style.left = x + 'px';
-                    ripples.style.top = y + 'px';
-                this.appendChild(ripples);
+                if (ripples.length < 10) { // this restricts the user from creating lots of ripples
+                    var ripple = document.createElement('span');
+                    ripple.classList.add('ripple');
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    this.appendChild(ripple);
 
-                setTimeout(() => {
-                    ripples.remove();
-                }, 1200);
-            });
-        });
+                setTimeout(function() {
+                    ripple.remove();
+                }, 1200)}
+            });  
+        })
+
     </script>
 
 </body>
