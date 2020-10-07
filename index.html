@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning App</title>
+    <link href="https://fonts.googleapis.com/css2?family=Sansita+Swashed:wght@600&display=swap" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            user-select: none;
+            cursor: pointer;
+        }
+        .container{
+            width: 100%;
+            display: grid;
+            grid-auto-flow: dense;
+            grid-template:  "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh
+                            "1fr 1fr 1fr 1fr 1fr" 40vh;
+            grid-gap: 0px; 
+            background: #f6f5fc;    
+            padding: 12px;  
+            padding-top: 16px;  
+        }
+        .card{
+            margin: 8px;
+            border: 3px solid  #d1d3e2; /* #DDDFEB */
+            position: relative;
+            background: #fff;
+            transition: all .4s;
+            border-radius: 1em;
+            box-shadow: 0 0 32px rgba(0,0,0,.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        figure{
+            text-align: center;
+        }
+        figcaption{
+            font-family: 'Sansita Swashed', cursive;
+            font-size: 1.6em;
+            margin-top: 8px;
+        }
+        .ripple{
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.7);
+            position: absolute;
+            transform: scale(0);
+            animation: ripple 0.6s linear;
+        }
+        @keyframes ripple{
+            to{ transform: scale(2.5); opacity: 0; }
+        }
+        @media(max-width: 1250px){
+            .container{
+                grid-template:  "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh
+                                "1fr 1fr 1fr 1fr" 42vh;
+                            }                
+        }
+        @media(max-width: 990px){
+            .container{
+                grid-template:  "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh
+                                "1fr 1fr 1fr " 42vh;
+                            }                
+        }
+        @media(max-width: 769px){
+            .container{
+                grid-template:  "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh
+                                "1fr 1fr " 43vh;
+                            }  
+        }
+        @media(max-width: 500px){
+            .container{
+                grid-template:  "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh
+                                "1fr" 45vh;
+                margin-top: 12px; 
+                            }  
+            .card{
+                margin: 12px 20px;
+            }
+                                                   
+        }
+    
+        
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card">
+            <figure>
+                <img src="img/001-tomato.svg" width="200" height="200">
+                <figcaption>Tomato</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/002-lime.svg" width="200" height="200">
+                <figcaption>Lime</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/003-cabbage.svg" width="200" height="200">
+                <figcaption>Cabbage</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/004-melon.svg" width="200" height="200">
+                <figcaption>Melon</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/005-broccoli.svg" width="200" height="200">
+                <figcaption>Broccoli</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/006-peas.svg" width="200" height="200">
+                <figcaption>Peas</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/007-radish.svg" width="200" height="200">
+                <figcaption>Radish</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/008-cucumber.svg" width="200" height="200">
+                <figcaption>Cucumber</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/009-eggplant.svg" width="200" height="200">
+                <figcaption>Eggplant</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/010-orange.svg" width="200" height="200">
+                <figcaption>Orange</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/011-blueberry.svg" width="200" height="200">
+                <figcaption>Blueberry</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/012-pomegranate.svg" width="200" height="200">
+                <figcaption>Pomegranate</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/013-artichoke.svg" width="200" height="200">
+                <figcaption>Artichoke</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/014-corn.svg" width="200" height="200">
+                <figcaption>Corn</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/015-strawberry.svg" width="200" height="200">
+                <figcaption>Strawberry</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/016-Raspberry.svg" width="200" height="200">
+                <figcaption>Raspberry</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/017-lettuce.svg" width="200" height="200">
+                <figcaption>Lettuce</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/018-mango.svg" width="200" height="200">
+                <figcaption>Mango</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/019-leek.svg" width="200" height="200">
+                <figcaption>Leek</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/020-pumpkin.svg" width="200" height="200">
+                <figcaption>Pumpkin</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/021-tangerine.svg" width="200" height="200">
+                <figcaption>Tangerine</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/022-paprika.svg" width="200" height="200">
+                <figcaption>Paprika</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/023-onion.svg" width="200" height="200">
+                <figcaption>Onion</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/024-cherry.svg" width="200" height="200">
+                <figcaption>Cherry</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/025-potato.svg" width="200" height="200">
+                <figcaption>potato</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/026-apple.svg" width="200" height="200">
+                <figcaption>Apple</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/027-kiwi.svg" width="200" height="200">
+                <figcaption>Kiwi</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/028-pepper.svg" width="200" height="200">
+                <figcaption>Pepper</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/029-banana.svg" width="200" height="200">
+                <figcaption>Banana</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/030-ginger.svg" width="200" height="200">
+                <figcaption>Ginger</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/031-plum.svg" width="200" height="200">
+                <figcaption>Plum</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/032-sweet potato.svg" width="200" height="200">
+                <figcaption>Sweet Potato</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/033-papaya.svg" width="200" height="200">
+                <figcaption>Papaya</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/034-olive.svg" width="200" height="200">
+                <figcaption>Olive</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/035-carrot.svg" width="200" height="200">
+                <figcaption>Carrot</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/036-lemon.svg" width="200" height="200">
+                <figcaption>Lemon</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/037-pineapple.svg" width="200" height="200">
+                <figcaption>Pineapple</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/038-apricot.svg" width="200" height="200">
+                <figcaption>Apricot</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/039-peach.svg" width="200" height="200">
+                <figcaption>Peach</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/040-passion fruit.svg" width="200" height="200">
+                <figcaption>Passion Fruit</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/041-coconut.svg" width="200" height="200">
+                <figcaption>Coconut</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/042-chili.svg" width="200" height="200">
+                <figcaption>Chili</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/043-garlic.svg" width="200" height="200">
+                <figcaption>Garlic</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/044-grapes.svg" width="200" height="200">
+                <figcaption>Grapes</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/045-avocado.svg" width="200" height="200">
+                <figcaption>Avocado</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/046-pear.svg" width="200" height="200">
+                <figcaption>Pear</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/047-zucchini.svg" width="200" height="200">
+                <figcaption>Zucchini</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/048-asparagus.svg" width="200" height="200">
+                <figcaption>Asparagus</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/049-mushroom.svg" width="200" height="200">
+                <figcaption>Mushroom</figcaption>
+            </figure>
+        </div>
+
+        <div class="card">
+            <figure>
+                <img src="img/050-watermelon.svg" width="200" height="200">
+                <figcaption>Watermelon</figcaption>
+            </figure>
+        </div>
+        
+    </div>
+
+    <script>
+        var card = document.querySelector('.card');
+
+        Array.prototype.forEach.call(card, function(b){
+            b.addEventListener('click', createRipple);
+        })
+
+        function createRipple(e){
+
+            if(this.getElementsByClassName('ripple').length > 0)
+                {
+                this.removeChild(this.childNodes[1]);
+                }
+            
+            var circle = document.createElement('div');
+            this.appendChild(circle);
+            
+            var d = Math.max(this.clientWidth, this.clientHeight);
+            circle.style.width = circle.style.height = d + 'px';
+            
+            circle.style.left = e.clientX - this.offsetLeft - d / 2 + 'px';
+            circle.style.top = e.clientY - this.offsetTop - d / 2 + 'px';
+            
+            circle.classList.add('ripple');
+        }
+    </script>
+
+</body>
+</html>
+
+
+
